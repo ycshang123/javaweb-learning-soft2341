@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="class01-servlet" />
+        <module name="book-online" />
       </profile>
     </annotationProcessing>
   </component>
