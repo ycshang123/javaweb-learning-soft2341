@@ -1,4 +1,4 @@
-package top.soft.class04cookiesession;
+package top.soft.class04cookiesession.cookie;
 
 
 import jakarta.servlet.ServletException;
@@ -9,26 +9,22 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.net.URLEncoder;
 
 /**
  * @author ycshang
- * @description: TODO
- * @date 2024-09-30 下午3:10
+ * @description: Cookie 的基本使用
+ * @date 2024-10-08 下午1:46
  */
 
 @WebServlet("/cookieDemo01")
 public class CookieDemo01 extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        发送 Cookie
-//        1、创建 Cookie 对象
-//        resp.setContentType("text/html;charset=UTF-8");
-//        resp.setCharacterEncoding("UTF-8");
-        Cookie cookie = new Cookie("username","zs");
-//        2、对 cookie 持久化
-//        cookie.setMaxAge(60);
-//        3、通过 response 发送 cookie
-         resp.addCookie(cookie);
+//       1、创建 Cookie 对象
+        Cookie cookie = new Cookie("username", "zhangsan");
+//       2、通过 response 发送 Cookie
+        resp.addCookie(cookie);
+//        3、cookie存活时间
+        cookie.setMaxAge(60 * 60 * 24 * 7);
     }
 }

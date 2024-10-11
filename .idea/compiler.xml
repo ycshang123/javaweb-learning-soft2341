@@ -7,12 +7,13 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="class01-servlet" />
+        <module name="class04-cookie-session" />
         <module name="class02-request" />
         <module name="class03-response" />
+        <module name="book-online" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="book-online" target="17" />
       <module name="class03-resonse" target="17" />
     </bytecodeTargetLevel>
   </component>

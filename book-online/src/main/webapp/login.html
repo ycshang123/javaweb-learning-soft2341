@@ -147,6 +147,11 @@
             flex: 0 0 33%;
         }
 
+        .remember-box {
+            width: 70%;
+            display: flex;
+        }
+
     </style>
 </head>
 <body>
@@ -171,6 +176,13 @@
                 <input type="password" name="password" class="input-box" placeholder="密码" id="password">
             </label>
         </div>
+        <div class="remember-box">
+            <p style="margin-right:6px">记住我:</p>
+            <label>
+                <input type="checkbox" id="remember" name="remember">
+            </label>
+
+        </div>
         <div>
             <label>
                 <input type="submit" value="立即登录" class="btn">
@@ -189,5 +201,30 @@
     </form>
 </div>
 </body>
+<script>
+    let remember = document.getElementById("remember");
+    remember.onclick = function () {
+        let username = document.getElementById("username");
+        let password = document.getElementById("password");
+        if (remember.checked) {
+            username.value = getCookie("account");
+            password.value = getCookie("password");
+        }
+
+    }
+
+    function getCookie(name) {
+        const keyName = name + "=";
+        const cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            const value = cookies[i].trim();
+            if (value.indexOf(keyName) === 0) {
+                return value.substring(keyName.length, value.length)
+            }
+        }
+        return ""
+
+    }
+</script>
 
 </html>

@@ -85,8 +85,10 @@ public class ResponseTypeDemo extends HttpServlet {
 
     private void getPdf(HttpServletRequest request, HttpServletResponse response) throws IOException {
         response.setContentType("application/pdf");
+//        response.setContentType("application/msword");
         String path = request.getServletContext().getRealPath("");
         File file = new File(path + "/pdf/玩转Git.pdf");
+//        File file = new File(path + "/pdf/测试.doc");
         InputStream in = new FileInputStream(file);
         int read = 0;
         ServletOutputStream out = response.getOutputStream();

@@ -23,7 +23,7 @@ public class ServletContextDemo01 extends HttpServlet {
 //        获取 ServletContext 对象
         ServletContext servletContext = req.getServletContext();
 //        获取文件文件名
-        String fileName ="hello.pdf";
+        String fileName ="测试.doc";
 
 //        获取资源文件类型
         String mimeType = servletContext.getMimeType(fileName);
