@@ -60,36 +60,42 @@
                 tableElement.innerHTML = tableData;
             }
 
-            // 绑定删除按钮的事件处理器
+            //选取页面中所有带有 deleteBrand 类名的元素，并将它们存储在 deleteButtons 变量中
             const deleteButtons = document.querySelectorAll('.deleteBrand');
             if (deleteButtons) {
                 deleteButtons.forEach(function (button) {
                     button.onclick = function () {
                         const id = this.closest('tr').getAttribute('data-id');
-                        axios({
-                            method: "post",
-                            url: "http://localhost:8080/removeBrand?id=" + id
-                        }).then(function (resp) {
-                            if (resp.status === 200) {
-                                getBrandList();
-                            }
-                        }).catch(function (error) {
-                            console.error("删除失败:", error);
-                        });
+                        deleteBrand(id);
                     };
                 });
             }
-
 
         }).catch(function (error) {
             console.error("获取数据失败:", error);
         });
     }
+
     // 新增品牌列表
     document.getElementById("addButton").onclick = function () {
         location.href = "brandInfo.html";
     }
 
+    function deleteBrand(id) {
+        if (!confirm("确定要删除选定品牌吗?")) return;
+        axios({
+            method: "post",
+            url: "http://localhost:8080/removeBrand?id=" + id
+        }).then(function (resp) {
+            if (resp.status === 200) {
+                getBrandList();
+            }
+        }).catch(function (error) {
+            console.error("删除失败:", error);
+        });
+
+
+    }
 
 
 </script>
