@@ -2,21 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Axios 请求</title>
+    <title>使用Axios 发起 Get 方式请求</title>
 </head>
 <body>
-<h1>Axios 请求</h1>
+<h1>Axios 发起 GET 方式请求</h1>
 
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
     axios({
         method:"get",
         url:"http://localhost:8080/axiosServlet?username=zhangsan"
-    }).then(function (resp) {
-        alert(resp.data);
-    }).catch(function (error) {
-        alert(error);
-    });
+    }).then(function (resp){
+        console.log(resp)
+        alert(resp.data)
+    }).catch(function (err){
+        console.log(err)
+    })
 </script>
 </body>
 </html>

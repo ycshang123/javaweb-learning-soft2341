@@ -2,19 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>使用axios向后端请求品牌列表数据</title>
+    <title>品牌列表</title>
     <link rel="stylesheet" href="css/style.css">
-
 </head>
 <body>
 <div class="container">
     <label>
-        <input type="button" value="添加品牌" style="background-color: #167f92;margin-bottom: 10px" id="addButton">
+        <input type="button" value="添加品牌" style="background-color: #167f92;margin-bottom: 10px" id="addButton"/>
     </label>
-
     <hr>
-    <table id="brandTable" class="responseTable">
-    </table>
+    <table id="brandTable" class="responseTable"></table>
 </div>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
@@ -22,85 +19,53 @@
         getBrandList();
     }
 
-    // 品牌列表
+    <!--    获取品牌列表-->
     function getBrandList() {
         axios({
             method: "get",
             url: "http://localhost:8080/brand"
         }).then(function (resp) {
             let brands = resp.data;
-            let tableData = ` <tr>
-            <th>序号</th>
-            <th>品牌名称</th>
-            <th>企业名称</th>
-            <th>排序</th>
-            <th>品牌介绍</th>
-            <th>操作</th>
-        </tr>`;
+            let tableData = `<tr>
+<th>序号</th>
+<th>品牌名称</th>
+<th>企业名称</th>
+<th>排序</th>
+<th>品牌介绍</th>
+<th>操作</th>
+</tr>`;
 
-            // 遍历响应回来的数据
+            //     遍历响应的数据
             for (let i = 0; i < brands.length; i++) {
                 let brand = brands[i];
-                tableData +=
-                    `<tr data-id="${brand.id}">
-<td>${brand.id}</td>
-<td>${brand.brandName}</td>
-<td>${brand.companyName}</td>
-<td>${brand.ordered}</td>
-<td>${brand.description}</td>
-<td>
-<span class="deleteBrand">删除</span>
+                tableData += `
+            <tr data-id="${brand.id}">
+            <td>${brand.id}</td>
+            <td>${brand.brandName}</td>
+            <td>${brand.companyName}</td>
+            <td>${brand.ordered}</td>
+            <td>${brand.description}</td>
+            <td>
+            <span>删除</span>
 </td>
 </tr>`;
+                //     拼接响应结果
+                const tableValue = document.getElementById("brandTable");
+                if (tableValue) {
+                    tableValue.innerHTML = tableData
+                }
             }
-
-            // 将拼接好的字符串写到表头
-            const tableElement = document.getElementById("brandTable");
-            if (tableElement) {
-                tableElement.innerHTML = tableData;
-            }
-
-            //选取页面中所有带有 deleteBrand 类名的元素，并将它们存储在 deleteButtons 变量中
-            const deleteButtons = document.querySelectorAll('.deleteBrand');
-            if (deleteButtons) {
-                deleteButtons.forEach(function (button) {
-                    button.onclick = function () {
-                        const id = this.closest('tr').getAttribute('data-id');
-                        deleteBrand(id);
-                    };
-                });
-            }
-
-        }).catch(function (error) {
-            console.error("获取数据失败:", error);
-        });
+        })
     }
 
-    // 新增品牌列表
+
+//     新增品牌
     document.getElementById("addButton").onclick = function () {
-        location.href = "brandInfo.html";
+        location.href = "brandInfo.html"
     }
-
-    function deleteBrand(id) {
-        if (!confirm("确定要删除选定品牌吗?")) return;
-        axios({
-            method: "post",
-            url: "http://localhost:8080/removeBrand?id=" + id
-        }).then(function (resp) {
-            if (resp.status === 200) {
-                getBrandList();
-            }
-        }).catch(function (error) {
-            console.error("删除失败:", error);
-        });
-
-
-    }
-
-
 </script>
-</body>
 
+</body>
 <style>
     .responseTable {
         width: 95%;
@@ -184,13 +149,6 @@
         }
     }
 
-    /*body {*/
-    /*        padding: 0 2em;*/
-    /*        font-family: Arial, sans-serif;*/
-    /*        color: #024457;*/
-    /*        background: #f2f2f2;*/
-    /*    }*/
-
     h1 {
         font-family: Verdana;
         font-weight: normal;
@@ -206,5 +164,4 @@
     }
 
 </style>
-
 </html>

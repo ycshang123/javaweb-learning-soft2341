@@ -1,7 +1,8 @@
 package top.soft.brandlist.servlet;
 
 
-import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson.JSON;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -14,8 +15,8 @@ import java.util.List;
 
 /**
  * @author ycshang
- * @description: 处理前端请求，返回品牌列表 JSON 数据
- * @date 2024-10-14 下午3:15
+ * @description: 品牌列表
+ * @date 2024-10-15 下午2:57
  */
 @WebServlet("/brand")
 public class BrandServlet extends HttpServlet {
@@ -28,22 +29,19 @@ public class BrandServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        将 brandList 转成 JSON 串返回给客户端
+//        将 brandList 转成 JSON 串 返回给客户端
         resp.setContentType("application/json;charset=utf-8");
-        // 获取 Servlet 上下文中的 "brands" 属性
-        Object brandsList = req.getServletContext().getAttribute("brands");
-
-// 检查是否为 null，并进行类型转换
-        List<Brand> brands = null;
-        if (brandsList instanceof List) {
-            brands = (List<Brand>) brandsList;
+        ServletContext servletContext = req.getServletContext();
+        Object brands = servletContext.getAttribute("brands");
+        List<Brand> brandList = null;
+        if (brands instanceof List) {
+            brandList = (List<Brand>) brands;
         }
+        brandList = brandList == null ? getBrandList() : brandList;
 
-        brands = brands == null ? getBrandList() : brands;
-
-        String jsonString = JSON.toJSONString(brands);
-        req.getServletContext().setAttribute("brands", brands);
-
+        String jsonString = JSON.toJSONString(brandList);
+        req.getServletContext().setAttribute("brands", brandList);
         resp.getWriter().write(jsonString);
+
     }
 }

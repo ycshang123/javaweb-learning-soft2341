@@ -6,7 +6,7 @@ import top.soft.bookonline.entity.User;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class UserDaoTest {
+class AAUserDaoTest {
 
     @Test
     void insertUser() {

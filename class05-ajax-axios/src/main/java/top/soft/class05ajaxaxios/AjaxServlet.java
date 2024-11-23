@@ -1,4 +1,4 @@
-package top.soft.brandlist.servlet;
+package top.soft.class05ajaxaxios;
 
 
 import jakarta.servlet.ServletException;
@@ -11,9 +11,10 @@ import java.io.IOException;
 
 /**
  * @author ycshang
- * @description: TODO
- * @date 2024-10-15 上午9:39
+ * @description: ajax 初体验
+ * @date 2024-10-15 下午1:37
  */
+
 @WebServlet("/ajaxServlet")
 public class AjaxServlet extends HttpServlet {
     @Override
